@@ -41,4 +41,26 @@ L.control
   })
   .addTo(map);
 
-L.control.Fullscreen().addTo(map);
+// Fullscreen
+L.control
+  .fullscreen()
+  .addTo(map);
+
+
+// function addiere(zahl1, zahl2) {
+//   let summe = zahl1 + zahl2;
+//   console.log("Summe:", summe);
+// }
+
+// addiere(1, 2);
+
+// funktion
+async function loadSights(url) {
+  console.log("Loading", url);
+  let response = await fetch(url);
+  let geojson = await response.json();
+  // console.log(geojson);
+  L.geoJSON(geojson).addTo(map);
+}
+
+loadSights("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SEHENSWUERDIGOGD&srsName=EPSG:4326&outputFormat=json");
