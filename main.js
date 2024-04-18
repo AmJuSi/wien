@@ -20,7 +20,6 @@ let themaLayer = {
   stops: L.featureGroup().addTo(map),
   zones: L.featureGroup().addTo(map),
   hotels: L.featureGroup().addTo(map),
-
 }
 
 // Hintergrundlayer
@@ -36,6 +35,10 @@ L.control
     "Esri.WorldImagery": L.tileLayer.provider("Esri.WorldImagery"),
   }, {
     "Sehenswürdigkeiten": themaLayer.sights,
+    "Touristische Kraftfahrlinien Liniennetz Vienna Sightseeing Linie Wien ": themaLayer.lines,
+    "Touristische Kraftfahrlinien Haltestellen Vienna Sightseeing Linie Standorte Wien ": themaLayer.stops,
+    "Fußgängerzonen Wien ": themaLayer.zones,
+    "Hotels und Unterkünfte Standorte Wien ": themaLayer.hotels,
   })
   .addTo(map);
 
