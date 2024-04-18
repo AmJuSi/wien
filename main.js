@@ -16,6 +16,11 @@ startLayer.addTo(map);
 
 let themaLayer = {
   sights: L.featureGroup().addTo(map),
+  lines: L.featureGroup().addTo(map),
+  stops: L.featureGroup().addTo(map),
+  zones: L.featureGroup().addTo(map),
+  hotels: L.featureGroup().addTo(map),
+
 }
 
 // Hintergrundlayer
@@ -35,10 +40,10 @@ L.control
   .addTo(map);
 
 // Marker Stephansdom
-L.marker([stephansdom.lat, stephansdom.lng])
-  .addTo(themaLayer.sights)
-  .bindPopup(stephansdom.title)
-  .openPopup();
+// L.marker([stephansdom.lat, stephansdom.lng])
+//   .addTo(themaLayer.sights)
+//   .bindPopup(stephansdom.title)
+//   .openPopup();
 
 // Maßstab
 L.control
