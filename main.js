@@ -157,12 +157,11 @@ async function loadHotels(url) {
     onEachFeature: function (feature, layer) {
       console.log(feature);
       console.log(feature.properties.NAME);
-      // layer.bindPopup(`
-      // <img src="${feature.properties.THUMBNAIL}" alt ="*">
-      // <h4><a href= "${feature.properties.WEITERE_INF}" 
-      // target="wien"> ${feature.properties.NAME}</a> </h4>
-      // <adress>${feature.properties.ADRESSE}</adress>
-      // `);
+      layer.bindPopup(`
+      <h4><a href= "${feature.properties.WEBLINK1}" 
+      target="wien"> ${feature.properties.BETRIEB}</a> </h4>
+      <adress>${feature.properties.ADRESSE}</adress>
+      `);
     }
   }).addTo(themaLayer.hotels);
 }
