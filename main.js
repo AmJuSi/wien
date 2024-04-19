@@ -158,10 +158,14 @@ async function loadHotels(url) {
       console.log(feature);
       console.log(feature.properties.NAME);
       layer.bindPopup(`
-      <h4><a href= "${feature.properties.WEBLINK1}" 
-      target="wien"> ${feature.properties.BETRIEB}</a> </h4>
-      <adress>${feature.properties.ADRESSE}</adress>
-      `);
+      <h4>${feature.properties.BETRIEB}</h4>
+      <br> ${feature.properties.BETRIEBSART_TXT} ${feature.properties.KATEGORIE_TXT}
+      <br>_________________________________
+      <br> Addr.: ${feature.properties.ADRESSE}
+      <br> Tel.: ${feature.properties.KONTAKT_TEL}
+      <br><a href ="${feature.properties.KONTAKT_EMAIL}" target = "wien"> ${feature.properties.KONTAKT_EMAIL} </a>
+      <br> <a href= "${feature.properties.WEBLINK1}" target ="wien"> Homepage </a>
+     `);
     }
   }).addTo(themaLayer.hotels);
 }
