@@ -86,17 +86,17 @@ async function loadLines(url) {
   console.log("Loading", url);
   let response = await fetch(url);
   let geojson = await response.json();
-  // console.log(geojson);
+  console.log(geojson);
   L.geoJSON(geojson, {
     onEachFeature: function (feature, layer) {
       console.log(feature);
       console.log(feature.properties.NAME);
-      // layer.bindPopup(`
-      // <img src="${feature.properties.THUMBNAIL}" alt ="*">
-      // <h4><a href= "${feature.properties.WEITERE_INF}" 
-      // target="wien"> ${feature.properties.NAME}</a> </h4>
-      // <adress>${feature.properties.ADRESSE}</adress>
-      // `);
+      layer.bindPopup(`
+      <h4> <i class="fa-solid fa-bus"></i> ${feature.properties.LINE_NAME}</h4>
+      <br> <i class="fa-regular fa-circle-stop"></i> ${feature.properties.FROM_NAME}
+      <br> <i class="fa-solid fa-arrow-down"></i>
+      <br> <i class="fa-regular fa-circle-stop"></i> ${feature.properties.TO_NAME}
+      `);
     }
   }).addTo(themaLayer.lines);
 }
