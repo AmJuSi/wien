@@ -113,12 +113,10 @@ async function loadStops(url) {
     onEachFeature: function (feature, layer) {
       console.log(feature);
       console.log(feature.properties.NAME);
-      // layer.bindPopup(`
-      // <img src="${feature.properties.THUMBNAIL}" alt ="*">
-      // <h4><a href= "${feature.properties.WEITERE_INF}" 
-      // target="wien"> ${feature.properties.NAME}</a> </h4>
-      // <adress>${feature.properties.ADRESSE}</adress>
-      // `);
+      layer.bindPopup(`
+      <h4><i class="fa-solid fa-bus"></i> ${feature.properties.LINE_NAME}</h4>
+      <br> ${feature.properties.STAT_ID} ${feature.properties.STAT_NAME}
+      `);
     }
   }).addTo(themaLayer.stops);
 }
@@ -159,7 +157,7 @@ async function loadHotels(url) {
       console.log(feature.properties.NAME);
       layer.bindPopup(`
       <h4>${feature.properties.BETRIEB}</h4>
-      <br> ${feature.properties.BETRIEBSART_TXT} ${feature.properties.KATEGORIE_TXT}
+      <br> <strong> ${feature.properties.BETRIEBSART_TXT} ${feature.properties.KATEGORIE_TXT} </strong>
       <br>_________________________________
       <br> Addr.: ${feature.properties.ADRESSE}
       <br> Tel.: ${feature.properties.KONTAKT_TEL}
