@@ -135,9 +135,9 @@ async function loadZones(url) {
       console.log(feature.properties.NAME);
       layer.bindPopup(`
       <h4> Fußgängerzone ${feature.properties.ADRESSE}" </h4>
-      <br> <i class="fa-regular fa-clock"></i> ${feature.properties.ZEITRAUM}
-      <br>
-      <br> <i class="fa-solid fa-circle-exclamation"></i> ${feature.properties.AUSN_TEXT}
+      <br> <i class="fa-regular fa-clock"></i> ${feature.properties.ZEITRAUM || "dauerhaft"}
+      <br> 
+      <br> <i class="fa-solid fa-circle-exclamation"></i> ${feature.properties.AUSN_TEXT || "ohne Ausnahme"}
       `);
     }
   }).addTo(themaLayer.zones);
@@ -160,8 +160,8 @@ async function loadHotels(url) {
       <br> <strong> ${feature.properties.BETRIEBSART_TXT} ${feature.properties.KATEGORIE_TXT} </strong>
       <br>_________________________________
       <br> Addr.: ${feature.properties.ADRESSE}
-      <br> Tel.: ${feature.properties.KONTAKT_TEL}
-      <br><a href ="${feature.properties.KONTAKT_EMAIL}" target = "wien"> ${feature.properties.KONTAKT_EMAIL} </a>
+      <br> Tel.: <a href="tel: ${feature.properties.KONTAKT_TEL}">${feature.properties.KONTAKT_TEL}</a> </br>
+      <br><a href ="mailto:${feature.properties.KONTAKT_EMAIL}"> ${feature.properties.KONTAKT_EMAIL} </a>
       <br> <a href= "${feature.properties.WEBLINK1}" target ="wien"> Homepage </a>
      `);
     }
