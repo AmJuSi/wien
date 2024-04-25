@@ -15,11 +15,11 @@ let startLayer = L.tileLayer.provider("BasemapAT.grau");
 startLayer.addTo(map);
 
 let themaLayer = {
-  sights: L.featureGroup().addTo(map),
-  lines: L.featureGroup().addTo(map),
-  stops: L.featureGroup().addTo(map),
+  // sights: L.featureGroup().addTo(map),
+  // lines: L.featureGroup().addTo(map),
+  // stops: L.featureGroup().addTo(map),
   zones: L.featureGroup().addTo(map),
-  hotels: L.featureGroup().addTo(map),
+  //hotels: L.featureGroup().addTo(map),
 }
 
 // Hintergrundlayer
@@ -160,7 +160,7 @@ async function loadHotels(url) {
       <br> <strong> ${feature.properties.BETRIEBSART_TXT} ${feature.properties.KATEGORIE_TXT} </strong>
       <br>_________________________________
       <br> Addr.: ${feature.properties.ADRESSE}
-      <br> Tel.: <a href="tel: ${feature.properties.KONTAKT_TEL}">${feature.properties.KONTAKT_TEL}</a> </br>
+      <br> Tel.: <a href="tel: ${feature.properties.KONTAKT_TEL}">${feature.properties.KONTAKT_TEL}</a>
       <br><a href ="mailto:${feature.properties.KONTAKT_EMAIL}"> ${feature.properties.KONTAKT_EMAIL} </a>
       <br> <a href= "${feature.properties.WEBLINK1}" target ="wien"> Homepage </a>
      `);
