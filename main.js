@@ -15,7 +15,7 @@ let startLayer = L.tileLayer.provider("BasemapAT.grau");
 startLayer.addTo(map);
 
 let themaLayer = {
-  sights: L.featureGroup(),
+  sights: L.featureGroup().addTo(map),
   lines: L.featureGroup().addTo(map),
   stops: L.featureGroup(),
   zones: L.featureGroup().addTo(map),
@@ -67,6 +67,7 @@ async function loadSights(url) {
   let geojson = await response.json();
   // console.log(geojson);
   L.geoJSON(geojson, {
+
     onEachFeature: function (feature, layer) {
       //console.log(feature);
       //console.log(feature.properties.NAME);
@@ -83,13 +84,13 @@ loadSights("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&ver
 
 // funktion LINES
 async function loadLines(url) {
-  console.log("Loading", url);
+  //console.log("Loading", url);
   let response = await fetch(url);
   let geojson = await response.json();
-  console.log(geojson);
+  //console.log(geojson);
   L.geoJSON(geojson, {
     style: function (feature) {
-      console.log(feature.properties.LINE_NAME);
+      //console.log(feature.properties.LINE_NAME);
       let lineName = feature.properties.LINE_NAME;
       let lineColor = "black";
       if (lineName == "Red Line") {
@@ -112,8 +113,8 @@ async function loadLines(url) {
       };
     },
     onEachFeature: function (feature, layer) {
-      console.log(feature);
-      console.log(feature.properties.NAME);
+      //console.log(feature);
+      //console.log(feature.properties.NAME);
       layer.bindPopup(`
       <h4> <i class="fa-solid fa-bus"></i> ${feature.properties.LINE_NAME}</h4>
       <br> <i class="fa-regular fa-circle-stop"></i> ${feature.properties.FROM_NAME}
@@ -128,14 +129,14 @@ loadLines("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&vers
 
 // funktion STOPS
 async function loadStops(url) {
-  console.log("Loading", url);
+  //console.log("Loading", url);
   let response = await fetch(url);
   let geojson = await response.json();
   // console.log(geojson);
   L.geoJSON(geojson, {
     onEachFeature: function (feature, layer) {
-      console.log(feature);
-      console.log(feature.properties.NAME);
+      //console.log(feature);
+      //console.log(feature.properties.NAME);
       layer.bindPopup(`
       <h4><i class="fa-solid fa-bus"></i> ${feature.properties.LINE_NAME}</h4>
       <br> ${feature.properties.STAT_ID} ${feature.properties.STAT_NAME}
@@ -148,7 +149,7 @@ loadStops("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&vers
 
 // funktion ZONES
 async function loadZones(url) {
-  console.log("Loading", url);
+  //console.log("Loading", url);
   let response = await fetch(url);
   let geojson = await response.json();
   // console.log(geojson);
@@ -178,7 +179,7 @@ loadZones("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&vers
 
 // funktion HOTELS
 async function loadHotels(url) {
-  console.log("Loading", url);
+  //console.log("Loading", url);
   let response = await fetch(url);
   let geojson = await response.json();
   // console.log(geojson);
