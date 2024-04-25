@@ -134,6 +134,14 @@ async function loadLines(url) {
 }
 loadLines("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json");
 
+/*
+bus_1.png Red
+bus_2.png Yellow
+bus_3.png Blue
+bus_4.png Green
+bus_5.png Grey
+bus_6.png Orange
+*/
 
 // funktion STOPS
 async function loadStops(url) {
@@ -142,6 +150,15 @@ async function loadStops(url) {
   let geojson = await response.json();
   // console.log(geojson);
   L.geoJSON(geojson, {
+    pointToLayer: function (feature, latlng) {
+      return L.marker(latlng, {
+        icon: L.icon({
+          iconUrl: `icons/bus_${feature.properties.LINE_ID}.png`,
+          iconAnchor: [16, 37],
+          popupAnchor: [0, -37],
+        })
+      });
+    },
     onEachFeature: function (feature, layer) {
       //console.log(feature);
       //console.log(feature.properties.NAME);
