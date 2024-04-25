@@ -15,8 +15,8 @@ let startLayer = L.tileLayer.provider("BasemapAT.grau");
 startLayer.addTo(map);
 
 let themaLayer = {
-  sights: L.featureGroup().addTo(map),
-  lines: L.featureGroup(),
+  sights: L.featureGroup(),
+  lines: L.featureGroup().addTo(map),
   stops: L.featureGroup(),
   zones: L.featureGroup().addTo(map),
   hotels: L.featureGroup(),
@@ -62,14 +62,14 @@ L.control
 
 // funktion
 async function loadSights(url) {
-  console.log("Loading", url);
+  //console.log("Loading", url);
   let response = await fetch(url);
   let geojson = await response.json();
   // console.log(geojson);
   L.geoJSON(geojson, {
     onEachFeature: function (feature, layer) {
-      console.log(feature);
-      console.log(feature.properties.NAME);
+      //console.log(feature);
+      //console.log(feature.properties.NAME);
       layer.bindPopup(`
       <img src="${feature.properties.THUMBNAIL}" alt ="*">
       <h4><a href= "${feature.properties.WEITERE_INF}" 
@@ -88,6 +88,29 @@ async function loadLines(url) {
   let geojson = await response.json();
   console.log(geojson);
   L.geoJSON(geojson, {
+    style: function (feature) {
+      console.log(feature.properties.LINE_NAME);
+      let lineName = feature.properties.LINE_NAME;
+      let lineColor = "black";
+      if (lineName == "Red Line") {
+        lineColor = "#FF4136";
+      } else if (lineName == "Yellow Line") {
+        lineColor = "#FFDC00";
+      } else if (lineName == "Blue Line") {
+        lineColor = "#0074D9";
+      } else if (lineName == "Green Line") {
+        lineColor = "#2ECC40";
+      } else if (lineName == "Grey Line") {
+        lineColor = "#AAAAAA";
+      } else if (lineName == "Orange Line") {
+        lineColor = "#FF851B";
+      } else {
+        // vielleicht kommt noch eine andere Linie dazu
+      }
+      return {
+        color: lineColor,
+      };
+    },
     onEachFeature: function (feature, layer) {
       console.log(feature);
       console.log(feature.properties.NAME);
@@ -161,8 +184,8 @@ async function loadHotels(url) {
   // console.log(geojson);
   L.geoJSON(geojson, {
     onEachFeature: function (feature, layer) {
-      console.log(feature);
-      console.log(feature.properties.NAME);
+      //console.log(feature);
+      //console.log(feature.properties.NAME);
       layer.bindPopup(`
       <h4>${feature.properties.BETRIEB}</h4>
       <br> <strong> ${feature.properties.BETRIEBSART_TXT} ${feature.properties.KATEGORIE_TXT} </strong>
