@@ -19,7 +19,7 @@ let themaLayer = {
   lines: L.featureGroup().addTo(map),
   stops: L.featureGroup().addTo(map),
   zones: L.featureGroup().addTo(map),
-  hotels: L.featureGroup(),
+  hotels: L.featureGroup().addTo(map),
 }
 
 // Hintergrundlayer
@@ -207,8 +207,37 @@ async function loadHotels(url) {
   //console.log("Loading", url);
   let response = await fetch(url);
   let geojson = await response.json();
-  // console.log(geojson);
+  //console.log(geojson);
   L.geoJSON(geojson, {
+    pointToLayer: function (feature, latlng) {
+      let hotelKat = feature.properties.KATEGORIE_TXT;
+      //console.log(hotelKat)
+      let iconName;
+      if (hotelKat == "nicht kategorisiert") {
+        iconName = "icons/hotel_0star.png";
+      } else if (hotelKat == "1*") {
+        iconName = "icons/hotel_1star.png";
+      } else if (hotelKat == "2*") {
+        iconName = "icons/hotel_2stars.png";
+      } else if (hotelKat == "3*") {
+        iconName = "icons/hotel_3stars.png";
+      } else if (hotelKat == "4*") {
+        iconName = "icons/hotel_4stars.png";
+      } else if (hotelKat == "5*") {
+        iconName = "icons/hotel_5stars.png";
+      } else {
+        // vielleicht kommt noch eine andere Linie dazu
+      }
+      return L.marker(latlng, {
+        icon: L.icon({
+          iconUrl: iconName,
+          iconAnchor: [16, 37],
+          popupAnchor: [0, -37],
+        })
+      });
+    },
+
+
     onEachFeature: function (feature, layer) {
       //console.log(feature);
       //console.log(feature.properties.NAME);
