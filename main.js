@@ -226,7 +226,7 @@ async function loadHotels(url) {
       } else if (hotelKat == "5*") {
         iconName = "icons/hotel_5stars.png";
       } else {
-        // vielleicht kommt noch eine andere Linie dazu
+        iconName = "icons/hotel_0star.png"
       }
       return L.marker(latlng, {
         icon: L.icon({
