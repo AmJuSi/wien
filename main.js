@@ -67,7 +67,13 @@ async function loadSights(url) {
   let geojson = await response.json();
   // console.log(geojson);
   L.geoJSON(geojson, {
-
+    pointToLayer: function (feature, latlng) {
+      return L.marker(latlng, {
+        icon: L.icon({
+          iconUrl: 'icons/photo.png',
+        })
+      });
+    },
     onEachFeature: function (feature, layer) {
       //console.log(feature);
       //console.log(feature.properties.NAME);
@@ -163,8 +169,8 @@ async function loadZones(url) {
       };
     },
     onEachFeature: function (feature, layer) {
-      console.log(feature);
-      console.log(feature.properties.NAME);
+      //console.log(feature);
+      //console.log(feature.properties.NAME);
       layer.bindPopup(`
       <h4> Fußgängerzone ${feature.properties.ADRESSE}" </h4>
       <br> <i class="fa-regular fa-clock"></i> ${feature.properties.ZEITRAUM || "dauerhaft"}
